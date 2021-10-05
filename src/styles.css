@@ -1,0 +1,27 @@
+body{
+    background: #fafafa;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0 0 10px;
+}
+
+#card{
+    width: 300px;
+    margin: 0 10px 10px 0;
+}
+
+#button{
+    margin: 0 10px 10px 0;
+}
+
+.empty-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(184, 184, 184);
+}
