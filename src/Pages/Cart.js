@@ -13,6 +13,7 @@ function Cart() {
         setLoading(true)
         await axios.post("http://localhost:3001/orders", cartProducts)
         setLoading(false)
+        clearCart()
     }
 
     const removeProduct = (productId) => {

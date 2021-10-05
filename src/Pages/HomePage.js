@@ -6,14 +6,13 @@ import '../styles.css'
 
 import { CardOfProduct } from '../components/card/card';
 import { useCartContext } from '../context/productsCart';
-import { Button, Menu, message, Empty, Skeleton } from 'antd';
-import { DropComponent } from '../components/Dropdown/drop'
+import { Button, message, Empty, Skeleton } from 'antd';
 
 function HomePage() {
     const [products, setProducts] = useState([])
     const [isLoading, setLoading] = useState(false)
     const [selection, setSelection] = useState([])
-    const { cartProducts, addProducts } = useCartContext()
+    const { addProducts } = useCartContext()
 
 
     const getPostsData = async () => {
@@ -61,19 +60,6 @@ function HomePage() {
                     </div>
                     <div className="container">
                         <Button id="button" onClick={() => addidProductsInCart()}>ADD PRODUCT</Button>
-                        <DropComponent contentButton="CART" productsLenght={cartProducts.length === 0 ? "0" : cartProducts.length} item={
-                            cartProducts.length === 0 ?
-                                <Menu.Item key={cartProducts.id}>
-                                    Empty cart
-                                </Menu.Item> :
-                                cartProducts.map((products) => {
-                                    return (
-                                        <Menu.Item key={products.id}>
-                                            {products.description}
-                                        </Menu.Item>
-                                    )
-                                })
-                        } />
                     </div>
                 </>
     )
