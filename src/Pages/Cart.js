@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { CardOfProduct } from '../components/card/card';
 import { useCartContext } from '../context/productsCart';
-import { Button, message, Skeleton } from 'antd';
+import { Button, message, Skeleton, Divider } from 'antd';
 import axios from 'axios'
 import { Empty } from 'antd';
+import Text from 'antd/lib/typography/Text';
 
 function Cart() {
     const { cartProducts, removeProducts, clearCart } = useCartContext()
@@ -14,6 +15,7 @@ function Cart() {
         await axios.post("http://localhost:3001/orders", cartProducts)
         setLoading(false)
         clearCart()
+        message.success(`Sucess`);
     }
 
     const removeProduct = (productId) => {
@@ -37,6 +39,14 @@ function Cart() {
             :
             cartProducts.length === 0 ? <div className="empty-container" ><Empty description="EMPTY CART" /></div> :
                 <>
+                    <div id="buttonAddText" className="container">
+                        <Text style={{ fontSize: '25px' }} type="secondary">CART</Text>
+                        <div>
+                            <Button type="primary" id="button" onClick={() => { postData() }} >BUY</Button>
+                            <Button onClick={() => { clearCart() }} >CLEAR CART</Button>
+                        </div>
+                    </div>
+                    <Divider />
                     <div className="container">
                         {
                             cartProducts.map((products) => {
@@ -45,10 +55,6 @@ function Cart() {
                                 )
                             })
                         }
-                    </div>
-                    <div className="container">
-                        <Button id="button" onClick={() => { postData() }} >BUY</Button>
-                        <Button onClick={() => { clearCart() }} >CLEAR CART</Button>
                     </div>
                     {totalPrice()}
                 </>

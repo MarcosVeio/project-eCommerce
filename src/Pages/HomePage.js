@@ -6,7 +6,8 @@ import '../styles.css'
 
 import { CardOfProduct } from '../components/card/card';
 import { useCartContext } from '../context/productsCart';
-import { Button, message, Empty, Skeleton } from 'antd';
+import { Button, message, Empty, Skeleton, Divider } from 'antd';
+import Text from 'antd/lib/typography/Text';
 
 function HomePage() {
     const [products, setProducts] = useState([])
@@ -51,15 +52,17 @@ function HomePage() {
             :
             products.length === 0 ? <div className="empty-container" ><Empty description="LIST OF PRODUCT EMPTY" /></div> :
                 <>
+                    <div id="buttonAddText" className="container">
+                        <Text style={{ fontSize: '25px' }} type="secondary">PRODUCTS</Text>
+                        <Button id="button" onClick={() => addidProductsInCart()}>ADD PRODUCT</Button>
+                    </div>
+                    <Divider />
                     <div className="container">
                         {products.map((product) => {
                             return (
                                 < CardOfProduct description={product.description} key={product.id} category={product.category} price={product.price} id={product.id} onChange={(ev) => handleSelection(ev, product)} checkBox="true" />
                             )
                         })}
-                    </div>
-                    <div className="container">
-                        <Button id="button" onClick={() => addidProductsInCart()}>ADD PRODUCT</Button>
                     </div>
                 </>
     )
