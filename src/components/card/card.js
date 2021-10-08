@@ -7,7 +7,7 @@ export const CardOfProduct = ({ checkBox, onClick, button, onChange, description
     const menu = (
         <Menu>
             <Menu.Item key="0">
-                <span style={{ color: "red" }} onClick={() => { onClick() }} >Remove item</span>
+                <span style={{ color: "red" }} onClick={() => onClick()} >Remove item</span>
             </Menu.Item>
         </Menu>
     );
@@ -15,9 +15,8 @@ export const CardOfProduct = ({ checkBox, onClick, button, onChange, description
         <Card id="card" description={description} extra={<Dropdown overlay={menu} trigger={['click']}>
             {button ? <Button onClick={e => e.preventDefault()}><EllipsisOutlined key="ellipsis" /></Button> : <></>}
         </Dropdown>} title={description}>
-            <p>Categoria: {category}</p>
-            <p>Preço: {price}</p>
-            <p>ID: {id}</p>
+            <p>Category: {category}</p>
+            <p>Price: {price}</p>
             {checkBox ? <Checkbox onChange={onChange}>select</Checkbox> : <></>}
 
         </Card>
