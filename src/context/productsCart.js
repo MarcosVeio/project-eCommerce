@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useReducer } from 'react'
+import React, { createContext, useCallback, useContext, useReducer, useEffect } from 'react'
 
 const cartContext = createContext()
 
@@ -18,7 +18,14 @@ const cartReducer = (state, { type, payload }) => {
 }
 
 export const CartProvider = ({ initialState, children }) => {
-    const [cartProducts, dispatchCartProducts] = useReducer(cartReducer, initialState)
+    const [cartProducts, dispatchCartProducts] = useReducer(cartReducer, initialState, () => {
+        const localData = localStorage.getItem('cartProducts')
+        return localData ? JSON.parse(localData) : initialState
+    })
+
+    useEffect(() => {
+        localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
+    }, [cartProducts])
 
     return <cartContext.Provider value={{ cartProducts, dispatchCartProducts }}>{children}</cartContext.Provider>
 }

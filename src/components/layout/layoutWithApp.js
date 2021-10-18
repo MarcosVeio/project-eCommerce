@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { Layout, Menu, Badge } from 'antd';
-import { useHistory } from 'react-router-dom';
-import { useCartContext } from '../../context/productsCart';
+import React, { useState } from 'react'
+import { Layout, Menu, Badge } from 'antd'
+import { useHistory } from 'react-router-dom'
+import { useCartContext } from '../../context/productsCart'
 import {
     HomeOutlined,
     ShoppingCartOutlined,
     SettingOutlined,
     AppstoreAddOutlined
-} from '@ant-design/icons';
+} from '@ant-design/icons'
 
-const { Content, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Content, Sider } = Layout
+const { SubMenu } = Menu
 
-export const SideBar = ({ children }) => {
-    const [collapsed, setCollapsed] = useState(true)
+export const LayoutWithApp = ({ children }) => {
+    const [collapsed, setCollapsed] = useState(false)
     const history = useHistory()
     const { cartProducts } = useCartContext()
 
     const onCollapse = isCollapsed => {
-        setCollapsed(isCollapsed);
-    };
+        setCollapsed(isCollapsed)
+    }
 
     return (
         <Layout className="site-layout" style={{ minHeight: '100vh' }}>
@@ -35,14 +35,17 @@ export const SideBar = ({ children }) => {
                     </Menu.Item>
                     <Menu.Item style={cartProducts.length ? { paddingTop: 10 } : { paddingTop: 0 }} onClick={() => { history.push('/cart') }} key="2" icon={
                         <Badge count={cartProducts.length}>
-                            <ShoppingCartOutlined />
+                            <ShoppingCartOutlined style={{ color: 'black' }} />
                         </Badge>
                     }>
                         Cart
                     </Menu.Item>
                     <SubMenu key="3" icon={<SettingOutlined />} title="Settings">
-                        <Menu.Item onClick={() => history.push('/registration')} key="4" icon={<AppstoreAddOutlined />}>
-                            Registration
+                        <Menu.Item onClick={() => history.push('/products')} key="4" icon={<AppstoreAddOutlined />}>
+                            Products
+                        </Menu.Item>
+                        <Menu.Item onClick={() => history.push('/orders')} key="5" icon={<AppstoreAddOutlined />}>
+                            Orders
                         </Menu.Item>
                     </SubMenu>
                 </Menu>
@@ -55,5 +58,5 @@ export const SideBar = ({ children }) => {
                 </Content>
             </Layout>
         </Layout >
-    );
+    )
 }

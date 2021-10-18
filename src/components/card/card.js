@@ -1,25 +1,16 @@
-import { Card, Button } from 'antd';
-import { Checkbox } from 'antd';
-import { EllipsisOutlined } from '@ant-design/icons';
-import { Menu, Dropdown } from 'antd';
+import { Card, Col } from 'antd'
+import './card.css'
 
-export const CardOfProduct = ({ checkBox, onClick, button, onChange, description, category, price, id }) => {
-    const menu = (
-        <Menu>
-            <Menu.Item key="0">
-                <span style={{ color: "red" }} onClick={() => { onClick() }} >Remove item</span>
-            </Menu.Item>
-        </Menu>
-    );
+export const CardOfProduct = ({ adm, checkBox, extra, description, category, price, id }) => {
+
     return (
-        <Card id="card" description={description} extra={<Dropdown overlay={menu} trigger={['click']}>
-            {button ? <Button onClick={e => e.preventDefault()}><EllipsisOutlined key="ellipsis" /></Button> : <></>}
-        </Dropdown>} title={description}>
-            <p>Categoria: {category}</p>
-            <p>Preço: {price}</p>
-            <p>ID: {id}</p>
-            {checkBox ? <Checkbox onChange={onChange}>select</Checkbox> : <></>}
-
-        </Card>
+        <Col className="gutter-row" span={6}>
+            <Card id="card" description={description} extra={extra} title={description}>
+                <p>Category: {category}</p>
+                <p>Price: {price}</p>
+                {adm}
+                {checkBox}
+            </Card>
+        </Col>
     )
 }
